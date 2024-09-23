@@ -1,0 +1,20 @@
+{
+  "name": "rebl.ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@mdxeditor/gurx": "^1.1.4",
+    "@virtuoso.dev/message-list": "^1.9.1",
+    "next": "12.2.6",
+    "patch-package": "^8.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}

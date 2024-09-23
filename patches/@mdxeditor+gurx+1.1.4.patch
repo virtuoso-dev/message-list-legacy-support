@@ -1,0 +1,53 @@
+diff --git a/node_modules/@mdxeditor/gurx/dist/index.js b/node_modules/@mdxeditor/gurx/dist/index.js
+index ac511ca..54572d0 100644
+--- a/node_modules/@mdxeditor/gurx/dist/index.js
++++ b/node_modules/@mdxeditor/gurx/dist/index.js
+@@ -377,36 +377,20 @@ function x() {
+ function j(s) {
+   const t = x();
+   t.register(s);
+-  const e = p.useCallback(
+-    (n) => t.sub(s, n),
+-    [t, s]
+-  );
+-  return p.useSyncExternalStore(
+-    e,
+-    () => t.getValue(s),
+-    () => t.getValue(s)
+-  );
++  const [value, setValue] = p.useState(() => t.getValue(s))
++  p.useEffect(() => {
++    return t.sub(s, setValue)
++  }, [s, t])
++  return value
+ }
+ function D(...s) {
+-  const t = x(), e = p.useMemo(
+-    () => t.getValues(s),
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-    []
+-  ), n = p.useRef(e), i = p.useCallback(
+-    (r) => {
+-      const o = (u) => {
+-        n.current = u, r();
+-      };
+-      return t.subMultiple(s, o);
+-    },
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-    [t, ...s]
+-  );
+-  return p.useSyncExternalStore(
+-    i,
+-    () => n.current,
+-    () => n.current
+-  );
++  const t = x()
++
++  const [value, setValue] = p.useState(() => t.getValues(s))
++  p.useEffect(() => {
++    return t.subMultiple(s, setValue)
++  }, [t, ...s])
++  return value
+ }
+ function v(s) {
+   const t = x();
